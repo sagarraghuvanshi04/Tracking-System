@@ -41,8 +41,25 @@ exports.getMe = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
   try {
-    const { name, avatar } = req.body;
-    const user = await User.findByIdAndUpdate(req.user._id, { name, avatar }, { new: true });
+    const { name, email, avatar, currentPassword, newPassword } = req.body;
+    const user = await User.findById(req.user._id);
+
+    if (email && email !== user.email) {
+      const exists = await User.findOne({ email, _id: { $ne: user._id } });
+      if (exists) return res.status(400).json({ message: 'Email already in use' });
+      user.email = email;
+    }
+    if (name) user.name = name;
+    if (avatar !== undefined) user.avatar = avatar;
+
+    if (newPassword) {
+      if (!currentPassword) return res.status(400).json({ message: 'Current password required' });
+      const valid = await user.comparePassword(currentPassword);
+      if (!valid) return res.status(400).json({ message: 'Current password is incorrect' });
+      user.password = newPassword;
+    }
+
+    await user.save();
     res.json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });

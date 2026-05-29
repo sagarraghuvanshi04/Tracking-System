@@ -59,6 +59,14 @@ export const dashboardAPI = {
   getStats: () => api.get('/dashboard/stats'),
 };
 
+// Notifications
+export const notificationsAPI = {
+  getAll: () => api.get('/notifications'),
+  markRead: (id) => api.put(`/notifications/${id}/read`),
+  markAllRead: () => api.put('/notifications/read-all'),
+  delete: (id) => api.delete(`/notifications/${id}`),
+};
+
 // AI
 export const aiAPI = {
   parseResume: (resumeText) => api.post('/ai/parse-resume', { resumeText }),

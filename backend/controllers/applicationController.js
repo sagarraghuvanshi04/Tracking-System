@@ -3,6 +3,7 @@ const Job = require('../models/Job');
 const Candidate = require('../models/Candidate');
 const { scoreCandidate } = require('../utils/openrouter');
 const { sendApplicationConfirmation, sendStatusUpdate } = require('../utils/email');
+const { createNotification } = require('./notificationController');
 
 exports.createApplication = async (req, res) => {
   try {
@@ -49,6 +50,13 @@ exports.createApplication = async (req, res) => {
     if (candidate.email) {
       sendApplicationConfirmation(candidate.email, candidate.name, job.title);
     }
+
+    // Notify all admins and recruiters
+    const User = require('../models/User');
+    const staff = await User.find({ role: { $in: ['admin', 'recruiter'] } }).select('_id');
+    await Promise.all(staff.map((u) =>
+      createNotification(u._id, 'New Application', `${candidate.name} applied for ${job.title}`, 'application', '/app/applications')
+    ));
 
     const populated = await Application.findById(application._id)
       .populate('job', 'title department')
@@ -116,6 +124,15 @@ exports.updateStage = async (req, res) => {
     if (populated.candidate?.email && !populated.candidate.email.includes('@noemail.local')) {
       sendStatusUpdate(populated.candidate.email, populated.candidate.name, populated.job?.title, stage);
     }
+
+    // Notify the user who made the change
+    await createNotification(
+      req.user._id,
+      'Stage Updated',
+      `${populated.candidate?.name} moved to "${stage}" for ${populated.job?.title}`,
+      'stage',
+      '/app/pipeline'
+    );
 
     res.json(application);
   } catch (err) {

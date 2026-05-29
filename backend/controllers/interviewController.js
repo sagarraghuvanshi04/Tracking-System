@@ -2,6 +2,7 @@ const Interview = require('../models/Interview');
 const Application = require('../models/Application');
 const Candidate = require('../models/Candidate');
 const { sendInterviewInvite } = require('../utils/email');
+const { createNotification } = require('./notificationController');
 
 exports.scheduleInterview = async (req, res) => {
   try {
@@ -49,6 +50,15 @@ exports.scheduleInterview = async (req, res) => {
     if (candidate.email && !candidate.email.includes('@noemail.local')) {
       sendInterviewInvite(candidate.email, candidate.name, jobTitle, scheduledAt, meetingLink);
     }
+
+    // Notify the scheduler
+    await createNotification(
+      req.user._id,
+      'Interview Scheduled',
+      `Interview scheduled for ${candidate.name} — ${jobTitle} on ${new Date(scheduledAt).toLocaleDateString()}`,
+      'interview',
+      '/app/interviews'
+    );
 
     const populated = await Interview.findById(interview._id)
       .populate('candidate', 'name email')

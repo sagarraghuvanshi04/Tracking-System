@@ -12,6 +12,7 @@ import Interviews from './pages/interviews/Interviews';
 import Pipeline from './pages/pipeline/Pipeline';
 import SmartShortlist from './pages/shortlist/SmartShortlist';
 import Settings from './pages/Settings';
+import Profile from './pages/profile/Profile';
 import LandingPage from './pages/landing/LandingPage';
 import { Spinner } from './components/ui';
 
@@ -46,6 +47,7 @@ function AppRoutes() {
         <Route path="shortlist" element={<SmartShortlist />} />
         <Route path="interviews" element={<Interviews />} />
         <Route path="settings" element={<ProtectedRoute roles={['admin']}><Settings /></ProtectedRoute>} />
+        <Route path="profile" element={<Profile />} />
       </Route>
       {/* Legacy redirects */}
       <Route path="/dashboard" element={<Navigate to="/app/dashboard" replace />} />

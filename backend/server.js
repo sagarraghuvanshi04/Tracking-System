@@ -37,6 +37,7 @@ app.use('/api/applications', require('./routes/applications'));
 app.use('/api/interviews', require('./routes/interviews'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/ai', require('./routes/ai'));
+app.use('/api/notifications', require('./routes/notifications'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'OK', message: 'Smart ATS API Running' }));
 
