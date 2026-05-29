@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   Box, Grid, Card, CardContent, Typography, Button, Chip, Stack,
   TextField, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions,
-  Avatar, CircularProgress, InputAdornment, Divider, Alert, LinearProgress,
+  Avatar, CircularProgress, InputAdornment, Divider, Alert,
 } from '@mui/material';
 import {
   Search, Upload, Phone, LocationOn, Work, Add, Visibility,

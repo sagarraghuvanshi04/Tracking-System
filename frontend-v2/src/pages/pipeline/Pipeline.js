@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { applicationsAPI, jobsAPI } from '../../api/services';
 import { useAuth } from '../../context/AuthContext';
 import {
-  Box, Typography, Chip, Avatar, CircularProgress, TextField, MenuItem, Stack,
+  Box, Typography, Chip, CircularProgress, TextField, MenuItem,
 } from '@mui/material';
 import { Star, ChevronRight, ChevronLeft, BoltRounded } from '@mui/icons-material';
 import toast from 'react-hot-toast';

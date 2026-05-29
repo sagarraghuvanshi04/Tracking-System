@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { candidatesAPI, jobsAPI, applicationsAPI, aiAPI } from '../../api/services';
 import {
   Box, Card, CardContent, Typography, Button, Chip, Stack,
-  TextField, MenuItem, CircularProgress, Divider, LinearProgress,
+  TextField, MenuItem, CircularProgress, LinearProgress,
   Collapse, Avatar,
 } from '@mui/material';
 import { BoltRounded, Star, ExpandMore, ExpandLess, Warning } from '@mui/icons-material';
