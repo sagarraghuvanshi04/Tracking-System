@@ -8,7 +8,24 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: ['http://localhost:3000', process.env.CLIENT_URL, 'https://tracking-system-o5rf.onrender.com'], credentials: true }));
+const allowedOrigins = [
+  'http://localhost:3000',
+  process.env.CLIENT_URL,
+  'https://tracking-system-o5rf.onrender.com',
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    // Allow any vercel.app domain + explicitly listed origins
+    if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+}));
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
