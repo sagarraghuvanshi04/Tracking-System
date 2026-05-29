@@ -10,6 +10,8 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:3002',
   process.env.CLIENT_URL,
   'https://tracking-system-o5rf.onrender.com',
 ].filter(Boolean);

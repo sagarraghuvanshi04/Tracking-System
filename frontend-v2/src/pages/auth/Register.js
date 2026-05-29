@@ -8,6 +8,10 @@ import {
 import { BoltRounded, Email, Lock, Person, Badge } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 
+const adornment = (Icon) => ({
+  slotProps: { input: { startAdornment: <InputAdornment position="start"><Icon sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> } },
+});
+
 export default function Register() {
   const [form, setForm] = useState({ name: '', email: '', password: '', role: 'recruiter' });
   const [loading, setLoading] = useState(false);
@@ -53,34 +57,25 @@ export default function Register() {
             <Typography variant="h6" fontWeight={700} mb={3}>Get started for free</Typography>
             <form onSubmit={handleSubmit}>
               <Stack spacing={2.5}>
-                <TextField
-                  label="Full Name" value={form.name}
+                <TextField label="Full Name" value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })} required
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Badge sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }}
-                />
-                <TextField
-                  label="Email address" type="email" value={form.email}
+                  {...adornment(Badge)} />
+                <TextField label="Email address" type="email" value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })} required
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Email sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }}
+                  {...adornment(Email)} />
+                <TextField label="Password" type="password" value={form.password}
+                  onChange={(e) => setForm({ ...form, password: e.target.value })} required
+                  slotProps={{ htmlInput: { minLength: 6 }, input: { startAdornment: <InputAdornment position="start"><Lock sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> } }}
                 />
-                <TextField
-                  label="Password" type="password" value={form.password}
-                  onChange={(e) => setForm({ ...form, password: e.target.value })} required inputProps={{ minLength: 6 }}
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Lock sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }}
-                />
-                <TextField
-                  select label="Role" value={form.role}
+                <TextField select label="Role" value={form.role}
                   onChange={(e) => setForm({ ...form, role: e.target.value })}
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Person sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }}
-                >
+                  {...adornment(Person)}>
                   <MenuItem value="recruiter">Recruiter</MenuItem>
                   <MenuItem value="hiring_manager">Hiring Manager</MenuItem>
                   <MenuItem value="admin">Admin</MenuItem>
                 </TextField>
-                <Button
-                  type="submit" variant="contained" fullWidth size="large" disabled={loading}
-                  sx={{ py: 1.5, background: 'linear-gradient(135deg, #e94560, #c73652)', '&:hover': { background: 'linear-gradient(135deg, #c73652, #a02a42)' } }}
-                >
+                <Button type="submit" variant="contained" fullWidth size="large" disabled={loading}
+                  sx={{ py: 1.5, background: 'linear-gradient(135deg, #e94560, #c73652)', '&:hover': { background: 'linear-gradient(135deg, #c73652, #a02a42)' } }}>
                   {loading ? 'Creating account...' : 'Create Account'}
                 </Button>
               </Stack>

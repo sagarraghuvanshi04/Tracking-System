@@ -111,7 +111,7 @@ export default function Candidates() {
     <Box>
       <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap', alignItems: 'center' }}>
         <TextField placeholder="Search candidates..." size="small" value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} sx={{ flex: 1, minWidth: 200 }}
-          InputProps={{ startAdornment: <InputAdornment position="start"><Search sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }} />
+          slotProps={{ input: { startAdornment: <InputAdornment position="start"><Search sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> } }} />
         <TextField size="small" placeholder="Skill (e.g. React)" value={skillFilter} onChange={(e) => { setSkillFilter(e.target.value); setPage(1); }} sx={{ width: 160 }} />
         <TextField select size="small" value={expFilter} onChange={(e) => { setExpFilter(e.target.value); setPage(1); }} sx={{ width: 160 }} label="Experience">
           <MenuItem value="">Any Experience</MenuItem>

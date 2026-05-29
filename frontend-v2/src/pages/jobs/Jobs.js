@@ -74,7 +74,7 @@ export default function Jobs() {
           placeholder="Search jobs..." size="small" value={search}
           onChange={(e) => { setSearch(e.target.value); setPage(1); }}
           sx={{ flex: 1, minWidth: 200 }}
-          InputProps={{ startAdornment: <InputAdornment position="start"><Search sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }}
+          slotProps={{ input: { startAdornment: <InputAdornment position="start"><Search sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> } }}
         />
         <TextField select size="small" value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }} sx={{ minWidth: 140 }} label="Status">
           <MenuItem value="">All Status</MenuItem>

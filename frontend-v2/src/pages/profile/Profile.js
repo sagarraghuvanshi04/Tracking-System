@@ -3,7 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 import { authAPI } from '../../api/services';
 import {
   Box, Card, CardContent, Typography, TextField, Button,
-  Chip, Stack, Avatar, Divider, InputAdornment,
+  Chip, Stack, Avatar, InputAdornment,
 } from '@mui/material';
 import { Person, Lock, Shield, Email } from '@mui/icons-material';
 import toast from 'react-hot-toast';
@@ -43,7 +43,6 @@ export default function Profile() {
 
   return (
     <Box sx={{ maxWidth: 600 }}>
-      {/* Profile Header */}
       <Card sx={{ mb: 3 }}>
         <CardContent sx={{ p: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5 }}>
@@ -65,7 +64,6 @@ export default function Profile() {
         </CardContent>
       </Card>
 
-      {/* Account Info */}
       <Card sx={{ mb: 3 }}>
         <CardContent sx={{ p: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
@@ -74,9 +72,12 @@ export default function Profile() {
           </Box>
           <form onSubmit={handleInfoSave}>
             <Stack spacing={2.5}>
-              <TextField fullWidth label="Full Name" value={info.name} onChange={(e) => setInfo((p) => ({ ...p, name: e.target.value }))} />
-              <TextField fullWidth label="Email Address" type="email" value={info.email} onChange={(e) => setInfo((p) => ({ ...p, email: e.target.value }))}
-                InputProps={{ startAdornment: <InputAdornment position="start"><Email sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }} />
+              <TextField fullWidth label="Full Name" value={info.name}
+                onChange={(e) => setInfo((p) => ({ ...p, name: e.target.value }))} />
+              <TextField fullWidth label="Email Address" type="email" value={info.email}
+                onChange={(e) => setInfo((p) => ({ ...p, email: e.target.value }))}
+                slotProps={{ input: { startAdornment: <InputAdornment position="start"><Email sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> } }}
+              />
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button type="submit" variant="contained" disabled={savingInfo}
                   sx={{ background: 'linear-gradient(135deg, #e94560, #c73652)', '&:hover': { background: 'linear-gradient(135deg, #c73652, #a02a42)' } }}>
@@ -88,7 +89,6 @@ export default function Profile() {
         </CardContent>
       </Card>
 
-      {/* Change Password */}
       <Card>
         <CardContent sx={{ p: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
@@ -97,9 +97,12 @@ export default function Profile() {
           </Box>
           <form onSubmit={handlePwdSave}>
             <Stack spacing={2.5}>
-              <TextField fullWidth label="Current Password" type="password" value={pwd.currentPassword} onChange={(e) => setPwd((p) => ({ ...p, currentPassword: e.target.value }))} />
-              <TextField fullWidth label="New Password" type="password" value={pwd.newPassword} onChange={(e) => setPwd((p) => ({ ...p, newPassword: e.target.value }))} helperText="Minimum 6 characters" />
-              <TextField fullWidth label="Confirm New Password" type="password" value={pwd.confirm} onChange={(e) => setPwd((p) => ({ ...p, confirm: e.target.value }))} />
+              <TextField fullWidth label="Current Password" type="password" value={pwd.currentPassword}
+                onChange={(e) => setPwd((p) => ({ ...p, currentPassword: e.target.value }))} />
+              <TextField fullWidth label="New Password" type="password" value={pwd.newPassword}
+                onChange={(e) => setPwd((p) => ({ ...p, newPassword: e.target.value }))} helperText="Minimum 6 characters" />
+              <TextField fullWidth label="Confirm New Password" type="password" value={pwd.confirm}
+                onChange={(e) => setPwd((p) => ({ ...p, confirm: e.target.value }))} />
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button type="submit" variant="contained" disabled={savingPwd}
                   sx={{ background: 'linear-gradient(135deg, #e94560, #c73652)', '&:hover': { background: 'linear-gradient(135deg, #c73652, #a02a42)' } }}>

@@ -91,7 +91,7 @@ export default function Applications() {
     <Box>
       <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap', alignItems: 'center' }}>
         <TextField select size="small" value={jobFilter} onChange={(e) => { setJobFilter(e.target.value); setPage(1); }} sx={{ flex: 1, minWidth: 180 }} label="Filter by Job"
-          InputProps={{ startAdornment: <InputAdornment position="start"><Search sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }}>
+          slotProps={{ input: { startAdornment: <InputAdornment position="start"><Search sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> } }}>
           <MenuItem value="">All Jobs</MenuItem>
           {jobs.map((j) => <MenuItem key={j._id} value={j._id}>{j.title}</MenuItem>)}
         </TextField>

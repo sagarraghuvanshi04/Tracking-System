@@ -3,10 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   Box, Card, CardContent, TextField, Button, Typography,
-  MenuItem, InputAdornment, Alert, Stack,
+  MenuItem, InputAdornment, Stack,
 } from '@mui/material';
 import { BoltRounded, Email, Lock, Person } from '@mui/icons-material';
 import toast from 'react-hot-toast';
+
+const adornment = (Icon) => ({
+  slotProps: { input: { startAdornment: <InputAdornment position="start"><Icon sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> } },
+});
 
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '', role: 'recruiter' });
@@ -53,30 +57,21 @@ export default function Login() {
             <Typography variant="h6" fontWeight={700} mb={3}>Sign in to your account</Typography>
             <form onSubmit={handleSubmit}>
               <Stack spacing={2.5}>
-                <TextField
-                  select label="Sign in as" value={form.role}
+                <TextField select label="Sign in as" value={form.role}
                   onChange={(e) => setForm({ ...form, role: e.target.value })}
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Person sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }}
-                >
+                  {...adornment(Person)}>
                   <MenuItem value="recruiter">Recruiter</MenuItem>
                   <MenuItem value="hiring_manager">Hiring Manager</MenuItem>
                   <MenuItem value="admin">Admin</MenuItem>
                 </TextField>
-                <TextField
-                  label="Email address" type="email" value={form.email}
+                <TextField label="Email address" type="email" value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })} required
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Email sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }}
-                />
-                <TextField
-                  label="Password" type="password" value={form.password}
+                  {...adornment(Email)} />
+                <TextField label="Password" type="password" value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })} required
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Lock sx={{ fontSize: 18, color: '#94a3b8' }} /></InputAdornment> }}
-                />
-                <Button
-                  type="submit" variant="contained" fullWidth size="large"
-                  disabled={loading}
-                  sx={{ py: 1.5, background: 'linear-gradient(135deg, #e94560, #c73652)', '&:hover': { background: 'linear-gradient(135deg, #c73652, #a02a42)' } }}
-                >
+                  {...adornment(Lock)} />
+                <Button type="submit" variant="contained" fullWidth size="large" disabled={loading}
+                  sx={{ py: 1.5, background: 'linear-gradient(135deg, #e94560, #c73652)', '&:hover': { background: 'linear-gradient(135deg, #c73652, #a02a42)' } }}>
                   {loading ? 'Signing in...' : 'Sign In'}
                 </Button>
               </Stack>
