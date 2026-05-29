@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: ['http://localhost:3000', process.env.CLIENT_URL], credentials: true }));
+app.use(cors({ origin: ['http://localhost:3000', process.env.CLIENT_URL, 'https://tracking-system-o5rf.onrender.com'], credentials: true }));
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

@@ -5,7 +5,7 @@ const openRouterClient = axios.create({
   headers: {
     Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
     'Content-Type': 'application/json',
-    'HTTP-Referer': 'http://localhost:3000',
+    'HTTP-Referer': 'https://tracking-system-o5rf.onrender.com',
     'X-Title': 'Smart ATS Hiring Suite',
   },
 });
