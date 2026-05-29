@@ -10,7 +10,7 @@ import {
 } from '@mui/icons-material';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend,
+  PieChart, Pie, Cell,
 } from 'recharts';
 
 const STAGE_COLORS = {

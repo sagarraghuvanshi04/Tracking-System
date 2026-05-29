@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   Box, Drawer, AppBar, Toolbar, Typography, IconButton, Avatar,
   List, ListItem, ListItemButton, ListItemIcon, ListItemText,
-  Divider, Badge, Popover, Tooltip, Chip, Stack, Paper,
+  Divider, Badge, Popover, Tooltip, Chip,
   useMediaQuery, useTheme,
 } from '@mui/material';
 import {

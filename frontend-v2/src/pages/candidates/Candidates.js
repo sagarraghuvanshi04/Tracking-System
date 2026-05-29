@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import {
   Search, Upload, Phone, LocationOn, Work, Add, Visibility,
-  Delete, BoltRounded, Warning, Email, School, Refresh,
+  Delete, BoltRounded, Email, Refresh,
 } from '@mui/icons-material';
 import { useDropzone } from 'react-dropzone';
 import toast from 'react-hot-toast';
